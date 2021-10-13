@@ -1,2 +1,3 @@
 # RockPaperScissors
-Pocetak js-a za rps sajt. 
+
+Sajt za rock paper scissors igricu. 

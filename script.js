@@ -1,4 +1,27 @@
 
+const  signs=document.querySelectorAll("img");
+const  rundaIgrac=document.querySelector(".skor-igrac");
+const  rundaKompjuter=document.querySelector(".skor-kompjuter");
+const  rezultatRunde=document.querySelector(".rezultat");
+let playerSign="";
+let  rundaigrac=0;
+let  rundakompjuter=0;
+
+
+signs.forEach((sign) => { 
+        
+        sign.addEventListener("click", ()=>{
+
+                rundaIgrac.textContent="Player score : " + rundaigrac; 
+                rundaKompjuter.textContent="PC score : " +rundakompjuter;
+                playerSign=sign.id;
+
+                playRound();
+            
+        });})
+    
+
+
 
 function computerPlay() { 
 
@@ -15,82 +38,88 @@ function computerPlay() {
     }
     else
     {
-        signStr="scissors"
+        signStr="scissors";
     }
 
     return signStr;
 }
 
-function playRound(playerSelection, computerSelection)
+function playRound()
 {
-    playerSelection = prompt("Rock/Paper/Scissors?");
-    playerSelection= playerSelection.toLowerCase();
-    let strOutcome="";
-    console.log("Player: " + playerSelection); 
-    computerSelection = computerPlay();
-    console.log("Computer: " + computerSelection);
+    let playerSelection = playerSign;
+    let computerSelection = computerPlay();
 
     if(playerSelection=="rock" && computerSelection=="scissors") 
-    {
-        strOutcome="Wow, you've won the round!";
+    {       
+            rundaigrac++;
+            rundaIgrac.textContent="Player score : " + rundaigrac;
+            rezultatRunde.textContent="You won!";
+            if(rundaigrac==5)
+            {
+                restartGame();
+            }
     }
     else if(playerSelection=="scissors" && computerSelection=="paper")
-    {
-        strOutcome="Wow, you've won the round!";
+    {       
+            rundaigrac++;
+            rundaIgrac.textContent="Player score : " + rundaigrac;
+            rezultatRunde.textContent="You won!";
+            if(rundaigrac==5)
+             {
+            restartGame();
+                }
     }
     else if(playerSelection=="paper" && computerSelection=="rock")
     {
-        strOutcome="Wow, you've won the round!";
+             rundaigrac++;
+             rundaIgrac.textContent="Player score : " + rundaigrac;
+            rezultatRunde.textContent="You won!";
+            if(rundaigrac==5)
+            {
+                restartGame();
+            }
+        
+            
     }
     else if(playerSelection==computerSelection)
     {
-        strOutcome="It's a tie.";
+        rundaIgrac.textContent="Player score : " + rundaigrac;
+        rundaKompjuter.textContent="PC score : " + rundakompjuter;
+        rezultatRunde.textContent="It's a tie!";
     }
     else 
     {
-        strOutcome="Ehh, you lost.";
+            rundakompjuter++;
+            rundaKompjuter.textContent="PC score : " + rundakompjuter;
+            rezultatRunde.textContent="You lost!";
+            if(rundakompjuter==5)
+            {
+                restartGame();
+            }
     }
 
-    return strOutcome;
 
 }
 
-function game()
-{
-    let rundaZaIgraca=0;
-    let rundaZaKompjuter=0;
-    let strRoundOutcome="";
-    let strWinner="";
-    for(i=0; i<5; i++)
+function restartGame()
+{   
+    if(rundaigrac==5)
     {
-        strRoundOutcome=playRound();
+    rezultatRunde.textContent="CONGRATULATIONS YOU WON FIRST TO 5"; 
+    }
+    else 
+    {
+    rezultatRunde.textContent="GAME OVER, COMPUTER WON"
+    }
+    
+    rundaigrac=0;
+    rundakompjuter=0;
 
-        if(strRoundOutcome=="Wow, you've won the round!")
-        {
-            rundaZaIgraca++;
-        }
-        else if(strRoundOutcome=="Ehh, you lost.")
-        {
-            rundaZaKompjuter++;
-        }
-        else
-        {
-            rundaZaIgraca++;
-            rundaZaKompjuter++;
-        }
-    }
-    if(rundaZaIgraca>rundaZaKompjuter)
-    {
-        strWinner="Contragulations, you won best of 5"
-    }
-    else
-    {
-        strWinner="Ehh, you've lost best out of 5";
-    }
-
-    return console.log(strWinner);
 }
 
 
 
-game();
+
+
+
+
